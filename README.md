@@ -1,4 +1,4 @@
-# task_day_1
+# Flutter app
 
 A new Flutter project.
 
