@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
@@ -10,6 +11,9 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _MyWidgetState extends State<LoginScreen> {
+  TextEditingController myEmailController = TextEditingController();
+  TextEditingController myPasswordController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,7 +26,7 @@ class _MyWidgetState extends State<LoginScreen> {
             color: Colors.black,
           ),
           onPressed: () {
-            print("hello");
+            Navigator.pushNamed(context, '/register');
           },
         ),
       ),
@@ -79,6 +83,13 @@ class _MyWidgetState extends State<LoginScreen> {
                       ),
                       TextFormField(
                         autofocus: true,
+                        validator: (value) {
+                          if (value == null || value == value.isEmpty) {
+                            return 'Please Enter A valid Password Address';
+                          }
+                          return null;
+                        },
+                        controller: myEmailController,
                         decoration: InputDecoration(
                           hintText: "Enter Your Email",
                           border: OutlineInputBorder(
@@ -102,6 +113,15 @@ class _MyWidgetState extends State<LoginScreen> {
                         height: 10,
                       ),
                       TextFormField(
+                        validator: (value) {
+                          if (value == null ||
+                              value == value.isEmpty ||
+                              value.length < 8) {
+                            return 'Please Enter A valid Password Address';
+                          }
+                          return null;
+                        },
+                        controller: myPasswordController,
                         decoration: InputDecoration(
                           hintText: "Type here...",
                           suffixIcon: GestureDetector(
@@ -144,7 +164,9 @@ class _MyWidgetState extends State<LoginScreen> {
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: [
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/register');
+                        },
                         child: Text("Register"),
                         style: ButtonStyle(
                             minimumSize: MaterialStateProperty.all<Size>(
